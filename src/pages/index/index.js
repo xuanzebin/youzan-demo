@@ -9,6 +9,8 @@ import Vue from 'vue'
 import MintUI from 'mint-ui'
 Vue.use(MintUI)
 
+import Footnav from 'components/Footnav.vue'
+
 let view=new Vue({
     el:'#app',
     data:{
@@ -40,5 +42,8 @@ let view=new Vue({
                 this.loading=false
             })
         }
+    },
+    components:{
+        Footnav
     }
 })
