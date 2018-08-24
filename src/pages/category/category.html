@@ -58,7 +58,7 @@
               v-for="(list,index) in topLists"
               v-on:click="getSubList(index,list.id)"
               v-if="topLists"
-              v-bind:class={active:index===topIndex}
+              v-bind:class="{active:index===topIndex}"
               >{{list.name}}</li>
             </ul>
           </div>
