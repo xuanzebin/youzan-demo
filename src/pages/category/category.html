@@ -82,7 +82,7 @@
                         </div>
                         <div class="detail">
                           <div class="title">{{list.name}}</div>
-                          <div class="price">￥{{list.price | priceNumber}}</div>
+                          <div class="price">￥{{list.price | currency}}</div>
                           <div class="recommend">
                             <span>推荐值:</span>
                             <span>{{list.recommend}}</span>
@@ -127,6 +127,7 @@
               <ul class="category-content">
                 <li class="category-item js-category-item" data-item-id="list.id" data-item-name="list.name"
                 v-for="list in subLists.brandList"
+                v-on:click="toSearch(list.id,list.name)"
                 >
                   <img :src="list.img" alt="良品铺子" class="category-img">
                   <span class="category-item-name">
@@ -137,6 +138,7 @@
               <ul class="category-content">
                 <li class="category-item js-category-item" data-item-id="list.id" data-item-name="list.name"
                 v-for="list in subLists.categoryList"
+                v-on:click="toSearch(list.id,list.name)"
                 >
                   <img :src="list.img" alt="水果" class="category-img">
                   <span class="category-item-name">

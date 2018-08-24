@@ -5,7 +5,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import Footnav from 'components/Footnav.vue'
 import url from 'js/api.js'
-
+import mixin from 'js/mixin.js'
 let view=new Vue({
     el:'#app',
     data:{
@@ -38,22 +38,10 @@ let view=new Vue({
             axios.get(url.rank).then((response)=>{
                 this.rankData=response.data.data
             })
+        },
+        toSearch(id,keyword){
+            location.href=`search.html?id=${id}&keyword=${keyword}`
         }
     },
-    components:{
-        Footnav
-    },
-    filters:{
-        priceNumber(num){
-            num=num+''
-            let arr=num.split('.')
-            if (arr.length===1){
-                return num+'.00'
-            } else {
-                if (arr[1].length===1){
-                    return num+'0'
-                } else return num
-            }
-        }
-    }
+    mixins:[mixin]
 })
