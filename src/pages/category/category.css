@@ -367,7 +367,7 @@ only screen and (min-device-pixel-ratio:1.5) {
 }
 
 .content {
-  overflow-y: auto
+  overflow-y: auto;
 }
 
 .content,
@@ -774,7 +774,8 @@ html {
 }
 
 .inner-content {
-  width: 100%
+  width: 100%;
+  margin-bottom:50px;
 }
 
 .inner-content,
@@ -815,7 +816,8 @@ only screen and (min-device-pixel-ratio:1.5) {
 }
 
 .main-content {
-  height: 100%
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .main-content .category-title {
