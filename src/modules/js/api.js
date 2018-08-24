@@ -1,5 +1,6 @@
 let url={
-    hostLists:'/index/hotlists'
+    hostLists:'/index/hotlists',
+    bannerLists:'/index/banner'
 }
 
 let host = 'http://rap2api.taobao.org/app/mock/7058'

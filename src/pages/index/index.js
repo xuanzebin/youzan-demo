@@ -10,6 +10,7 @@ import MintUI from 'mint-ui'
 Vue.use(MintUI)
 
 import Footnav from 'components/Footnav.vue'
+import Swipe from 'components/Swipe.vue'
 
 let view=new Vue({
     el:'#app',
@@ -18,10 +19,12 @@ let view=new Vue({
         pageNum:1,
         pageSize:6,
         loading:false,
-        allLoad:false
+        allLoad:false,
+        bannerLists:null
     },
     created(){
         this.getList()
+        this.getBannerList()
     },
     methods:{
         getList(){
@@ -41,9 +44,15 @@ let view=new Vue({
                 this.pageNum++
                 this.loading=false
             })
+        },
+        getBannerList(){
+            axios.get(url.bannerLists).then((response)=>{
+                this.bannerLists=response.data.lists
+            })
         }
     },
     components:{
-        Footnav
+        Footnav,
+        Swipe
     }
 })
