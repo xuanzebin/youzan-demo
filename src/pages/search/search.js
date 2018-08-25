@@ -10,6 +10,9 @@ import mixin from 'js/mixin.js'
 import MintUI from 'mint-ui'
 Vue.use(MintUI)
 
+import Velocity from 'velocity-animate/velocity.js'
+import 'velocity-animate/velocity.ui.js'
+
 let {keyword,id}=qs.parse(window.location.search.substring(1))
 
 let view=new Vue({
@@ -21,7 +24,8 @@ let view=new Vue({
         pageSize:8,
         searchLists:null,
         searchLoading:false,
-        allLoad:false
+        allLoad:false,
+        isShow:false
     },
     created(){
         this.getSearchLists()
@@ -46,6 +50,17 @@ let view=new Vue({
                 this.pageNum++
                 this.searchLoading=false
             })
+        },
+        scrollMove(){
+            if (window.scrollY>=290){
+                this.isShow=true
+            } else {
+                this.isShow=false
+            }
+        },
+        goToTop(){
+            Velocity(document.body, 'scroll', { duration: 500, easing: "easeOutQuart" });
+            this.isShow=false
         }
     },
     mixins:[mixin]

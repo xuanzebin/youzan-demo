@@ -1072,7 +1072,6 @@ only screen and (min-device-pixel-ratio:1.5) {
 }
 
 .go-to-top {
-  display: none;
   position: fixed;
   right: 15px;
   bottom: 60px;
