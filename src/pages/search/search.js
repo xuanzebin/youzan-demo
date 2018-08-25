@@ -7,6 +7,8 @@ import url from 'js/api.js'
 import qs from 'qs'
 import mixin from 'js/mixin.js'
 
+import MintUI from 'mint-ui'
+Vue.use(MintUI)
 
 let {keyword,id}=qs.parse(window.location.search.substring(1))
 
@@ -17,15 +19,32 @@ let view=new Vue({
         id,
         pageNum:1,
         pageSize:8,
-        searchLists:null
+        searchLists:null,
+        searchLoading:false,
+        allLoad:false
     },
     created(){
         this.getSearchLists()
     },
     methods:{
         getSearchLists(){
-            axios.post(url.searchLists,{id,keyword,pageNum:this.pageNum,pageSize:this.pageSize}).then((response)=>{
-                this.searchLists=response.data.lists
+            if (this.allLoad) return 
+            this.searchLoading=true
+            axios.post(url.searchLists,{
+                id,
+                keyword,
+                pageNum:this.pageNum,
+                pageSize:this.pageSize
+            }).then((response)=>{
+                let currentList=response.data.lists
+                if (currentList.length<this.pageSize) this.allLoad=true
+                if (this.searchLists){
+                    this.searchLists=this.searchLists.concat(currentList)
+                } else {
+                    this.searchLists=currentList
+                }
+                this.pageNum++
+                this.searchLoading=false
             })
         }
     },

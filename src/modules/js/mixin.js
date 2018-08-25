@@ -1,4 +1,4 @@
-import Footnav from 'components/Footnav.vue'
+import Footnav from 'components/FootNav.vue'
 let mixin={
     filters:{
         currency(num){

@@ -9,7 +9,7 @@ import Vue from 'vue'
 import MintUI from 'mint-ui'
 Vue.use(MintUI)
 
-import Footnav from 'components/Footnav.vue'
+import Footnav from 'components/FootNav.vue'
 import Swipe from 'components/Swipe.vue'
 import mixin from 'js/mixin.js'
 let view=new Vue({
@@ -51,5 +51,21 @@ let view=new Vue({
             })
         }
     },
-    mixins:[mixin]
+    filters:{
+        currency(num){
+            num=num+''
+            let arr=num.split('.')
+            if (arr.length===1){
+                return num+'.00'
+            } else {
+                if (arr[1].length===1){
+                    return num+'0'
+                } else return num
+            }
+        }
+    },
+    components:{
+        Footnav,
+        Swipe
+    }
 })

@@ -338,7 +338,8 @@ img {
 }
 
 .content {
-  overflow-y: auto
+  /* overflow-y: auto */
+  overflow: hidden;
 }
 
 .content,

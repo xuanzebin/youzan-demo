@@ -3,7 +3,7 @@ import './category.css'
 
 import Vue from 'vue'
 import axios from 'axios'
-import Footnav from 'components/Footnav.vue'
+import Footnav from 'components/FootNav.vue'
 import url from 'js/api.js'
 import mixin from 'js/mixin.js'
 let view=new Vue({
