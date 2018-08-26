@@ -237,18 +237,18 @@
     v-show="showSku"
     @click="closeSku"
     ></div>
-    <div id="QfEqtDbeK9" class="sku-layout sku-box-shadow popup" style="overflow: hidden; position: absolute; z-index: 1000; background: white; bottom: 0px; left: 0px; right: 0px; visibility: visible; transform: translate3d(0px, 0px, 0px); transition: all 300ms ease; opacity: 1; "
+    <div id="QfEqtDbeK9" class="sku-layout sku-box-shadow popup" style="overflow: hidden; position: fixed; z-index: 1000; background: white; bottom: 0px; left: 0px; right: 0px; visibility: visible; transform: translate3d(0px, 0px, 0px); transition: all 300ms ease; opacity: 1; "
     v-show="showSku"
     >
       <div class="sku-layout-title name-card sku-name-card">
         <div class="thumb"><img class="js-goods-thumb goods-thumb" src="https://img.yzcdn.cn/upload_files/2017/07/12/FkSvYz8FLLD9-t0smXO43hF6ov7S.jpg?imageView2/2/w/100/h/100/q/75/format/webp?imageView2/2/w/100/h/100/q/75/format/webp" alt=""></div>
         <div class="detail goods-base-info clearfix">
-          <p class="title c-black ellipsis">寻找田野|最正宗的上海南汇8424 得奖最多奥运会指定西瓜1只/箱 9-11斤</p>
+          <p class="title c-black ellipsis">{{detailsLists.title}}</p>
           <div class="goods-price clearfix">
             <div class="current-price pull-left c-black">
-              <span class="price-name pull-left font-size-14 c-orange">¥</span><i class="js-goods-price price font-size-16 vertical-middle c-orange">98.00</i>
+              <span class="price-name pull-left font-size-14 c-orange">¥</span><i class="js-goods-price price font-size-16 vertical-middle c-orange">{{detailsLists.price | currency}}</i>
             </div>
-            <div class="original-price vertical-middle font-size-14 line-through">108</div>
+            <div class="original-price vertical-middle font-size-14 line-through">{{detailsLists.originalPrice |currency}}</div>
           </div>
         </div>
         <div class="js-cancel sku-cancel" @click="closeSku">
@@ -291,7 +291,7 @@
               </dl>
             </dd>
             <dt class="other-info">
-              <div class="stock">剩余450件
+              <div class="stock">剩余{{detailsLists.remain}}件
               </div>
             </dt>
           </dl>
