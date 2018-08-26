@@ -57,7 +57,7 @@
               </dl>
             </div>
           </div>
-          <div class="sku-detail adv-opts">
+          <div class="sku-detail adv-opts" v-on:click="changeSkuType(1)">
             <div class="sku-detail-inner adv-opts-inner">
               <dl class="sku-group select-sku js-select-sku">
                 <dt><span class="js-sku-label">选择</span>：</dt>
@@ -137,10 +137,10 @@
             </div>
             <div class="stick-bottom-btns">
               <!-- 尚未开售 -->
-              <div class="btn-cart">
-                <a href="https://h5.youzan.com/v2/showcase/goods?alias=1y7n2wi58q1as&amp;source=yzapp&amp;f_platform=yzapp&amp;reft=1499937523785&amp;spm=mars20003" class="js-add-cart">加入购物车</a>
+              <div class="btn-cart" v-on:click="changeSkuType(2)">
+                <a href="javascript:;" class="js-add-cart">加入购物车</a>
               </div>
-              <div class="btn-buy">
+              <div class="btn-buy" v-on:click="changeSkuType(3)">
                 <a href="javascript:;" class="js-buy-it">立即购买</a>
               </div>
             </div>
@@ -233,8 +233,13 @@
       <div class="history-wrap center">
         <ul class="history-list search-recom-list js-history-list clearfix"></ul><a class="tag tag-clear js-tag-clear c-gray-darker hide" href="javascript:;">清除历史搜索</a></div>
     </div>
-    <div id="yFzBKP9GDL" style="height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; transition: none 0.2s ease; opacity: 1; display: none;"></div>
-    <div id="QfEqtDbeK9" class="sku-layout sku-box-shadow popup" style="overflow: hidden; position: absolute; z-index: 1000; background: white; bottom: 0px; left: 0px; right: 0px; visibility: visible; transform: translate3d(0px, 0px, 0px); transition: all 300ms ease; opacity: 1; display: none;">
+    <div id="yFzBKP9GDL" style="height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; transition: none 0.2s ease; opacity: 1; "
+    v-show="showSku"
+    @click="closeSku"
+    ></div>
+    <div id="QfEqtDbeK9" class="sku-layout sku-box-shadow popup" style="overflow: hidden; position: absolute; z-index: 1000; background: white; bottom: 0px; left: 0px; right: 0px; visibility: visible; transform: translate3d(0px, 0px, 0px); transition: all 300ms ease; opacity: 1; "
+    v-show="showSku"
+    >
       <div class="sku-layout-title name-card sku-name-card">
         <div class="thumb"><img class="js-goods-thumb goods-thumb" src="https://img.yzcdn.cn/upload_files/2017/07/12/FkSvYz8FLLD9-t0smXO43hF6ov7S.jpg?imageView2/2/w/100/h/100/q/75/format/webp?imageView2/2/w/100/h/100/q/75/format/webp" alt=""></div>
         <div class="detail goods-base-info clearfix">
@@ -246,7 +251,7 @@
             <div class="original-price vertical-middle font-size-14 line-through">108</div>
           </div>
         </div>
-        <div class="js-cancel sku-cancel">
+        <div class="js-cancel sku-cancel" @click="closeSku">
           <div class="cancel-img"></div>
         </div>
       </div>
@@ -296,15 +301,15 @@
         <!-- <div class="bottom-padding"></div> -->
         <div class="confirm-action content-foot clearfix">
           <!-- 加入购物车 -->
-          <div class="big-btn-1-1" style="display: none;">
+          <div class="big-btn-1-1" v-show="skuType===2">
             <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn">加入购物车</a>
           </div>
           <!-- 立即购买 -->
-          <div class="big-btn-1-1">
+          <div class="big-btn-1-1" v-show="skuType===3">
             <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn">下一步</a>
           </div>
           <!-- 选择规格 -->
-          <div class="big-btn-2-1" style="display: none;">
+          <div class="big-btn-2-1" v-show="skuType===1">
             <a href="javascript:;" class="js-mutiBtn-confirm cart big-btn orange-btn vice-btn">加入购物车</a>
             <a href="javascript:;" class="js-mutiBtn-confirm confirm big-btn red-btn main-btn">立即购买</a>
           </div>

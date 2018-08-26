@@ -25,7 +25,9 @@ let view=new Vue({
         dealLists:null,
         bannerLists:null,
         detailTags,
-        curIndex:0
+        curIndex:0,
+        showSku:false,
+        skuType:1
     },
     created(){
         this.getDetails()
@@ -53,10 +55,26 @@ let view=new Vue({
             axios.post(url.deal,{id}).then((response)=>{
                 this.dealLists=response.data.data.lists
             })
+        },
+        changeSkuType(num){
+            this.showSku=true
+            this.skuType=num
+        },
+        closeSku(){
+            this.showSku=false
         }
     },
     components:{
         Swipe
     },
-    mixins:[mixin]
+    mixins:[mixin],
+    watch:{
+        showSku(val,oldVal){
+            document.body.style.overflow=val?'hidden':'auto'
+            document.querySelector('html').style.overflow=val?'hidden':'auto'
+            document.body.style.height=val?'100%':'auto'
+            document.querySelector('html').style.height=val?'100%':'auto'
+
+        }
+    }
 })
