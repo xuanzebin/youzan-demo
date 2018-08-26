@@ -49,6 +49,9 @@ let view=new Vue({
             axios.get(url.bannerLists).then((response)=>{
                 this.bannerLists=response.data.lists
             })
+        },
+        showGoods(){
+            window.location.href=`/goods?id=${list.id}`
         }
     },
     filters:{
