@@ -282,11 +282,11 @@
             <dd class="sku-quantity-contaienr">
               <dl class="clearfix">
                 <div class="quantity">
-                  <button class="minus disabled" type="button" disabled="true"></button>
-                  <input type="text" class="txt" pattern="[0-9]*" value="1">
+                  <button class="minus" type="button" :class="{disabled:skuValue===1}"></button>
+                  <input type="text" class="txt" pattern="[0-9]*" :value="skuValue">
                   <button class="plus" type="button"></button>
-                  <div class="response-area response-area-minus"></div>
-                  <div class="response-area response-area-plus"></div>
+                  <div class="response-area response-area-minus" @click="changeSkuValue(-1)"></div>
+                  <div class="response-area response-area-plus" @click="changeSkuValue(1)"></div>
                 </div>
               </dl>
             </dd>

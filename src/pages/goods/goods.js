@@ -27,7 +27,8 @@ let view=new Vue({
         detailTags,
         curIndex:0,
         showSku:false,
-        skuType:1
+        skuType:1,
+        skuValue:1
     },
     created(){
         this.getDetails()
@@ -62,6 +63,14 @@ let view=new Vue({
         },
         closeSku(){
             this.showSku=false
+        },
+        changeSkuValue(num){
+            if (num<0){
+                if (this.skuValue===1) return 
+                this.skuValue--
+            } else {
+                this.skuValue++
+            }
         }
     },
     components:{
