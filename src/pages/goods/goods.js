@@ -16,7 +16,7 @@ import Swipe from 'components/Swipe.vue'
 
 let {id}=qs.parse(window.location.search.substring(1))
 let detailTags=['商品详情','本店成交']
-
+let scrollTop
 let view=new Vue({
     el:'#app',
     data:{
@@ -79,12 +79,18 @@ let view=new Vue({
     mixins:[mixin],
     watch:{
         showSku(val,oldVal){
-            document.body.style.overflow=val?'hidden':'auto'
+            if (val){
+                scrollTop = document.scrollingElement.scrollTop
+                document.body.style.top = -scrollTop + 'px'
+            }
+            document.body.style.position=val?'fixed':'static'
             // document.body.style.margin=val?`0 0 ${window.scrollY}px 0`:'0px'
             document.querySelector('html').style.overflow=val?'hidden':'auto'
-            document.body.style.height=val?'100%':'auto'
+            document.body.style.width=val?'100%':'auto'
             document.querySelector('html').style.height=val?'100%':'auto'
-
+            if (!val){
+                document.scrollingElement.scrollTop = scrollTop;
+            }
         }
     }
 })
