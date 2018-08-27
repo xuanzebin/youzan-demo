@@ -19,10 +19,22 @@
   <link rel="stylesheet" href="./css/goods_theme.css">
   <link rel="stylesheet" href="./css/goods_mars.css">
   <link rel="stylesheet" href="./css/goods_sku.css"> -->
+  <style>
+    [v-cloak]{
+      display: none;
+    }
+    .fade-enter-active, .fade-leave-active {
+      transition: all 300ms ease;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      transform: translateY(100%); 
+      opacity: 0;
+    }
+  </style>
 </head>
 
 <body class="body-fixed-bottom default-theme">
-  <div id="app" v-if="detailsLists">
+  <div id="app" v-if="detailsLists" v-cloak>
     <div class="container wap-goods internal-purchase" style="min-height: 617px;">
       <div class="content no-sidebar">
         <div class="content-body">
@@ -233,92 +245,94 @@
       <div class="history-wrap center">
         <ul class="history-list search-recom-list js-history-list clearfix"></ul><a class="tag tag-clear js-tag-clear c-gray-darker hide" href="javascript:;">清除历史搜索</a></div>
     </div>
-    <div id="yFzBKP9GDL" style="height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; transition: none 0.2s ease; opacity: 1; "
-    v-show="showSku"
-    @click="closeSku"
-    ></div>
-    <div id="QfEqtDbeK9" class="sku-layout sku-box-shadow popup" style="overflow: hidden; position: fixed; z-index: 1000; background: white; bottom: 0px; left: 0px; right: 0px; visibility: visible; transform: translate3d(0px, 0px, 0px); transition: all 300ms ease; opacity: 1; "
-    v-show="showSku"
-    >
-      <div class="sku-layout-title name-card sku-name-card">
-        <div class="thumb"><img class="js-goods-thumb goods-thumb" src="https://img.yzcdn.cn/upload_files/2017/07/12/FkSvYz8FLLD9-t0smXO43hF6ov7S.jpg?imageView2/2/w/100/h/100/q/75/format/webp?imageView2/2/w/100/h/100/q/75/format/webp" alt=""></div>
-        <div class="detail goods-base-info clearfix">
-          <p class="title c-black ellipsis">{{detailsLists.title}}</p>
-          <div class="goods-price clearfix">
-            <div class="current-price pull-left c-black">
-              <span class="price-name pull-left font-size-14 c-orange">¥</span><i class="js-goods-price price font-size-16 vertical-middle c-orange">{{detailsLists.price | currency}}</i>
-            </div>
-            <div class="original-price vertical-middle font-size-14 line-through">{{detailsLists.originalPrice |currency}}</div>
-          </div>
-        </div>
-        <div class="js-cancel sku-cancel" @click="closeSku">
-          <div class="cancel-img"></div>
-        </div>
-      </div>
-      <div class="sku-detail adv-opts hotel-checkin-select" style="border: none; margin: 0; display: none;">
-        <div class="sku-detail-inner adv-opts-inner-addons">
-          <dl class="sku-group select-sku js-select-checkin-date">
-            <dt>时间：</dt>
-            <dd class="js-checkin-date-value">选择入住时间</dd>
-          </dl>
-        </div>
-      </div>
-      <div class="adv-opts layout-content" style="max-height: 554px;">
-        <div class="goods-models js-sku-views block block-list border-top-0">
-          <dl class="clearfix block-item sku-list-container">
-            <dt class="model-title sku-sel-title">
-              <label>净含量：</label>
-            </dt>
-            <dd>
-              <ul class="model-list sku-sel-list">
-                <li class="tag sku-tag pull-left ellipsis active">4500g-5000g</li>
-              </ul>
-            </dd>
-          </dl>
-          <dl class="clearfix block-item">
-            <dt class="sku-num pull-left">
-              <label>购买数量：</label>
-            </dt>
-            <dd class="sku-quantity-contaienr">
-              <dl class="clearfix">
-                <div class="quantity">
-                  <button class="minus" type="button" :class="{disabled:skuValue===1}"></button>
-                  <input type="text" class="txt" pattern="[0-9]*" :value="skuValue">
-                  <button class="plus" type="button"></button>
-                  <div class="response-area response-area-minus" @click="changeSkuValue(-1)"></div>
-                  <div class="response-area response-area-plus" @click="changeSkuValue(1)"></div>
-                </div>
-              </dl>
-            </dd>
-            <dt class="other-info">
-              <div class="stock">剩余{{detailsLists.remain}}件
+      <div id="yFzBKP9GDL" style="height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; transition: none 0.2s ease; opacity: 1; "
+      v-show="showSku"
+      @click="closeSku"
+      ></div>
+    <transition name="fade">
+      <div id="QfEqtDbeK9" class="sku-layout sku-box-shadow popup" style="overflow: hidden; position: fixed; z-index: 1000; background: white; bottom: 0px; left: 0px; right: 0px; visibility: visible;   "
+      v-show="showSku"
+      >
+        <div class="sku-layout-title name-card sku-name-card">
+          <div class="thumb"><img class="js-goods-thumb goods-thumb" src="https://img.yzcdn.cn/upload_files/2017/07/12/FkSvYz8FLLD9-t0smXO43hF6ov7S.jpg?imageView2/2/w/100/h/100/q/75/format/webp?imageView2/2/w/100/h/100/q/75/format/webp" alt=""></div>
+          <div class="detail goods-base-info clearfix">
+            <p class="title c-black ellipsis">{{detailsLists.title}}</p>
+            <div class="goods-price clearfix">
+              <div class="current-price pull-left c-black">
+                <span class="price-name pull-left font-size-14 c-orange">¥</span><i class="js-goods-price price font-size-16 vertical-middle c-orange">{{detailsLists.price | currency}}</i>
               </div>
-            </dt>
-          </dl>
-          <div class="block-item block-item-messages" style="display: none;">
+              <div class="original-price vertical-middle font-size-14 line-through">{{detailsLists.originalPrice |currency}}</div>
+            </div>
+          </div>
+          <div class="js-cancel sku-cancel" @click="closeSku">
+            <div class="cancel-img"></div>
           </div>
         </div>
-        <!-- <div class="bottom-padding"></div> -->
-        <div class="confirm-action content-foot clearfix">
-          <!-- 加入购物车 -->
-          <div class="big-btn-1-1" v-show="skuType===2">
-            <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn">加入购物车</a>
+        <div class="sku-detail adv-opts hotel-checkin-select" style="border: none; margin: 0; display: none;">
+          <div class="sku-detail-inner adv-opts-inner-addons">
+            <dl class="sku-group select-sku js-select-checkin-date">
+              <dt>时间：</dt>
+              <dd class="js-checkin-date-value">选择入住时间</dd>
+            </dl>
           </div>
-          <!-- 立即购买 -->
-          <div class="big-btn-1-1" v-show="skuType===3">
-            <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn">下一步</a>
+        </div>
+        <div class="adv-opts layout-content" style="max-height: 554px;">
+          <div class="goods-models js-sku-views block block-list border-top-0">
+            <dl class="clearfix block-item sku-list-container">
+              <dt class="model-title sku-sel-title">
+                <label>净含量：</label>
+              </dt>
+              <dd>
+                <ul class="model-list sku-sel-list">
+                  <li class="tag sku-tag pull-left ellipsis active">4500g-5000g</li>
+                </ul>
+              </dd>
+            </dl>
+            <dl class="clearfix block-item">
+              <dt class="sku-num pull-left">
+                <label>购买数量：</label>
+              </dt>
+              <dd class="sku-quantity-contaienr">
+                <dl class="clearfix">
+                  <div class="quantity">
+                    <button class="minus" type="button" :class="{disabled:skuValue===1}"></button>
+                    <input type="text" class="txt" pattern="[0-9]*" :value="skuValue">
+                    <button class="plus" type="button"></button>
+                    <div class="response-area response-area-minus" @click="changeSkuValue(-1)"></div>
+                    <div class="response-area response-area-plus" @click="changeSkuValue(1)"></div>
+                  </div>
+                </dl>
+              </dd>
+              <dt class="other-info">
+                <div class="stock">剩余{{detailsLists.remain}}件
+                </div>
+              </dt>
+            </dl>
+            <div class="block-item block-item-messages" style="display: none;">
+            </div>
           </div>
-          <!-- 选择规格 -->
-          <div class="big-btn-2-1" v-show="skuType===1">
-            <a href="javascript:;" class="js-mutiBtn-confirm cart big-btn orange-btn vice-btn">加入购物车</a>
-            <a href="javascript:;" class="js-mutiBtn-confirm confirm big-btn red-btn main-btn">立即购买</a>
+          <!-- <div class="bottom-padding"></div> -->
+          <div class="confirm-action content-foot clearfix">
+            <!-- 加入购物车 -->
+            <div class="big-btn-1-1" v-show="skuType===2">
+              <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn">加入购物车</a>
+            </div>
+            <!-- 立即购买 -->
+            <div class="big-btn-1-1" v-show="skuType===3">
+              <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn">下一步</a>
+            </div>
+            <!-- 选择规格 -->
+            <div class="big-btn-2-1" v-show="skuType===1">
+              <a href="javascript:;" class="js-mutiBtn-confirm cart big-btn orange-btn vice-btn">加入购物车</a>
+              <a href="javascript:;" class="js-mutiBtn-confirm confirm big-btn red-btn main-btn">立即购买</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
     <div class="motify" style="display: none;">
       <div class="motify-inner">已成功添加到购物车</div>
-  </div>
+    </div>
   </div>
 </body>
 

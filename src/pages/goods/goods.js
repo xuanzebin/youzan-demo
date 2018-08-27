@@ -89,7 +89,7 @@ let view=new Vue({
             document.body.style.width=val?'100%':'auto'
             document.querySelector('html').style.height=val?'100%':'auto'
             if (!val){
-                document.scrollingElement.scrollTop = scrollTop;
+                document.scrollingElement.scrollTop = scrollTop
             }
         }
     }
