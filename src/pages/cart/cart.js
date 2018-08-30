@@ -11,7 +11,8 @@ let view=new Vue({
     el:'.container',
     data:{
         cartLists:null,
-        total:0
+        total:0,
+        totalNum:''
     },
     created(){
         this.getLists()
@@ -51,6 +52,11 @@ let view=new Vue({
                     })
                 })
                 this.total=total
+                if (JSON.stringify(arr)!=='[]') {
+                    this.totalNum=`(${arr.length})` 
+                } else {
+                    this.totalNum=''
+                }
                 return arr
             }
             return []
