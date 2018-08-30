@@ -10,7 +10,8 @@ import axios from 'axios'
 let view=new Vue({
     el:'.container',
     data:{
-        cartLists:null
+        cartLists:null,
+        total:0
     },
     created(){
         this.getLists()
@@ -36,6 +37,23 @@ let view=new Vue({
                 }
                 return false
             }
+        },
+        selectList(){
+            if (this.cartLists&&this.cartLists.length){
+                let arr=[]
+                let total=0
+                this.cartLists.forEach(shop=>{
+                    shop.goodsList.forEach(good=>{
+                        if (good.checked){
+                            arr.push(good)
+                            total+=good.price*good.number
+                        }
+                    })
+                })
+                this.total=total
+                return arr
+            }
+            return []
         }
     },
     methods:{
