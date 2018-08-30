@@ -8,7 +8,7 @@ import mixin from 'js/mixin.js'
 import axios from 'axios'
 
 let view=new Vue({
-    el:'.container',
+    el:'#app',
     data:{
         cartLists:null,
         total:0,
@@ -68,6 +68,8 @@ let view=new Vue({
                 let list=response.data.cartList
                 list.forEach(shop=>{
                     shop.checked=true
+                    shop.editingStatus=false
+                    shop.editingMsg='编辑'
                     shop.goodsList.forEach(good=>{
                         good.checked=true
                     })
@@ -89,6 +91,15 @@ let view=new Vue({
         },
         selectAll(){
             this.allSelect=!this.allSelect
+        },
+        editingSwitch(shop,shopIndex){
+            shop.editingStatus=!shop.editingStatus
+            shop.editingMsg=shop.editingStatus?'完成':'编辑'
+            this.cartLists.forEach((otherShop,index)=>{
+                if (index!==shopIndex){
+                   otherShop.editingMsg=shop.editingStatus?'':'编辑'
+                }
+            })
         }
     },
     mixins:[mixin]

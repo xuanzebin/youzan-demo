@@ -24,7 +24,8 @@
 </head>
 
 <body class=" body-fixed-bottom" style="" >
-  <div class="container " style="min-height: 581px;" v-cloak>
+  <div id="app" v-cloak>
+  <div class="container " style="min-height: 581px;" >
     <div class="content clearfix js-page-content">
       <div id="cart-container">
         <div>
@@ -35,15 +36,15 @@
             <div class="block block-order block-cart"  v-for="(shop,shopIndex) in cartLists" :key="shop.shopId">
               <div class="header">
                 <div class="select-group js-select-group"><span class="check" :class="{checked:shop.checked}" @click="shopSelect(shop,shopIndex)"></span></div> <a class="shop-title"><i class="custom-store-img">店铺：</i>{{shop.shopTitle}}</a>
-                <a href="javascript:;" data-type="cart" class="j-edit-list pull-right c-blue font-size-12 edit-list">
+                <a href="javascript:;" data-type="cart" class="j-edit-list pull-right c-blue font-size-12 edit-list" @click="editingSwitch(shop,shopIndex)">
                   <!---->
-                  编辑
+                  {{shop.editingMsg}}
                 </a>
               </div>
               <!---->
               <div>
                 <ul class="js-list block block-list block-list-cart border-0">
-                  <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList" :key="good.id">
+                  <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList" :key="good.id" :class="{editing:shop.editingStatus}">
                     <div>
                       <div class="check-container"><span class="check" :class="{checked:good.checked}" @click="goodSelect(shop,good)"></span></div>
                       <div class="name-card clearfix">
@@ -56,12 +57,12 @@
                             {{good.sku}}
                           </p>
                           <!-- 显示状态 -->
-                          <div class="num">
+                          <div class="num" v-show="!shop.editingStatus">
                             ×<span class="num-txt">{{good.number}}</span>
                             <!---->
                           </div>
                           <!-- 编辑状态 -->
-                          <div class="num" style="display: none;">
+                          <div class="num"  v-show="shop.editingStatus">
                             <!---->
                             <div class="quantity">
                               <button type="button" class="minus disabled"></button>
@@ -129,7 +130,7 @@
                 合计：¥<span class="js-total-price" style="color: rgb(255, 102, 0);">{{total | currency}}</span>
                 <p class="c-gray-dark">不含运费</p>
               </div>
-              <button href="javascript:;" class="js-go-pay btn btn-orange-dark font-size-14" >
+              <button href="javascript:;" class="js-go-pay btn btn-orange-dark font-size-14" :disabled="!selectList.length" >
                 结算 {{totalNum}}
               </button>
               <!-- 编辑状态 -->
@@ -146,6 +147,7 @@
       <div class="ft-copyright " style="background-image: url(https://img.yzcdn.cn/upload_files/2016/11/15/147918630760182374.png);">
         <a class="yz-logo" href="https://www.youzan.com/?from_source=support_logo">有赞提供技术支持</a> </div>
     </div>
+  </div>
   </div>
 </body>
 
