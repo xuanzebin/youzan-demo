@@ -77,7 +77,7 @@
                         </div>
                         <div class="error-box"></div>
                       </div>
-                      <div class="delete-btn"><span>删除</span></div>
+                      <div class="delete-btn" @click="removeSingelGood(good,goodIndex)"><span>删除</span></div>
                     </div>
                   </li>
                 </ul>
@@ -148,7 +148,26 @@
         <a class="yz-logo" href="https://www.youzan.com/?from_source=support_logo">有赞提供技术支持</a> </div>
     </div>
   </div>
+  <div class="van-dialog" style="z-index: 2002;" v-show="removePopup">
+    <div class="van-hairline van-dialog__content">
+      <div class="van-dialog__message">
+        确定要删除该商品么?
+      </div>
+    </div>
+    <div class="van-dialog__footer van-dialog__footer--buttons">
+      <button class="van-button van-button--default van-button--large van-dialog__cancel" style="">
+        <span class="van-button__text">
+          取消
+        </span>
+      </button>
+      <button class="van-button van-button--default van-button--large van-dialog__confirm van-hairline--left" style="color:#00c000;">
+        <span class="van-button__text">
+          确认
+        </span>
+      </button>
+    </div>
   </div>
+  <div class="van-modal" style="z-index: 2001;" v-show="removePopup"></div>
+</div>
 </body>
-
 </html>

@@ -14,7 +14,8 @@ let view=new Vue({
         total:0,
         totalNum:'',
         editingShop:null,
-        editingShopIndex:-1
+        editingShopIndex:-1,
+        removePopup:false
     },
     created(){
         this.getLists()
@@ -142,6 +143,9 @@ let view=new Vue({
                    otherShop.editingMsg=shop.editingStatus?'':'编辑'
                 }
             })
+        },
+        removeSingelGood(good,goodIndex){
+            this.removePopup=true
         }
     },
     mixins:[mixin]
