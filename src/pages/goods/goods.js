@@ -28,7 +28,8 @@ let view=new Vue({
         curIndex:0,
         showSku:false,
         skuType:1,
-        skuValue:1
+        skuValue:1,
+        addToCart:false
     },
     created(){
         this.getDetails()
@@ -71,6 +72,10 @@ let view=new Vue({
             } else {
                 this.skuValue++
             }
+        },
+        addCart(){
+            this.addToCart=true
+            this.closeSku()
         }
     },
     components:{

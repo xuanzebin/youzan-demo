@@ -26,7 +26,7 @@
     .fade-enter-active, .fade-leave-active {
       transition: all 300ms ease;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    .fade-enter, .fade-leave-to {
       transform: translateY(100%); 
       opacity: 0;
     }
@@ -166,9 +166,9 @@
               <a class="js-show-more-btn icon show-more-btn hide"></a>
             </div>
           </div> -->
-          <div id="right-icon" class="js-right-icon ">
+          <div id="right-icon" class="js-right-icon "  v-show="addToCart">
             <div class="js-right-icon-container right-icon-container clearfix">
-              <a id="global-cart" href="https://h5.youzan.com/v2/trade/cart?kdt_id=16546132" class="icon new s0" style="">
+              <a id="global-cart" href="/cart.html" class="icon new s0">
                 <p class="icon-img"></p>
                 <p class="icon-txt">购物车</p>
               </a>
@@ -225,18 +225,8 @@
     </div>
     <div style="position: static; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;">
       <div id="trans-tooltip">
-        <div id="tip-left-top" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-left-top.png&quot;);"></div>
-        <div id="tip-top" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-top.png&quot;) repeat-x;"></div>
-        <div id="tip-right-top" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-right-top.png&quot;);"></div>
-        <div id="tip-right" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-right.png&quot;) repeat-y;"></div>
-        <div id="tip-right-bottom" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-right-bottom.png&quot;);"></div>
-        <div id="tip-bottom" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-bottom.png&quot;) repeat-x;"></div>
-        <div id="tip-left-bottom" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-left-bottom.png&quot;);"></div>
-        <div id="tip-left" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-left.png&quot;);"></div>
         <div id="trans-content"></div>
       </div>
-      <div id="tip-arrow-bottom" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-arrow-bottom.png&quot;);"></div>
-      <div id="tip-arrow-top" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-arrow-top.png&quot;);"></div>
     </div>
     <div class="search-bar" style="display:none;">
       <form class="search-form" action="https://h5.youzan.com/v2/search" method="GET">
@@ -315,7 +305,7 @@
           <div class="confirm-action content-foot clearfix">
             <!-- 加入购物车 -->
             <div class="big-btn-1-1" v-show="skuType===2">
-              <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn">加入购物车</a>
+              <a href="javascript:;" class="js-confirm-it big-btn red-btn main-btn" @click="addCart">加入购物车</a>
             </div>
             <!-- 立即购买 -->
             <div class="big-btn-1-1" v-show="skuType===3">
@@ -323,7 +313,7 @@
             </div>
             <!-- 选择规格 -->
             <div class="big-btn-2-1" v-show="skuType===1">
-              <a href="javascript:;" class="js-mutiBtn-confirm cart big-btn orange-btn vice-btn">加入购物车</a>
+              <a href="javascript:;" class="js-mutiBtn-confirm cart big-btn orange-btn vice-btn" @click="addCart">加入购物车</a>
               <a href="javascript:;" class="js-mutiBtn-confirm confirm big-btn red-btn main-btn">立即购买</a>
             </div>
           </div>
