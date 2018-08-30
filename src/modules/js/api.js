@@ -7,7 +7,8 @@ let url={
     searchLists:'/search/list',
     details:'/goods/details',
     deal:'/goods/deal',
-    evaluation:'/goods/evaluation'
+    evaluation:'/goods/evaluation',
+    cartLists:'/cart/list'
 }
 
 let host = 'http://rap2api.taobao.org/app/mock/7058'
