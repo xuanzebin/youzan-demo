@@ -12,7 +12,9 @@ let view=new Vue({
     data:{
         cartLists:null,
         total:0,
-        totalNum:''
+        totalNum:'',
+        editingShop:null,
+        editingShopIndex:-1
     },
     created(){
         this.getLists()
@@ -22,7 +24,7 @@ let view=new Vue({
             get(){
                 if(this.cartLists&&this.cartLists.length){
                     return this.cartLists.every(shop=>{
-                            return shop.checked
+                        return shop.checked
                     })
                 }
                 return false
@@ -60,6 +62,36 @@ let view=new Vue({
                 return arr
             }
             return []
+        },
+        allRemoveSelect:{
+            get(){
+                if (this.editingShop){
+                    return this.editingShop.goodsList.every(good=>{
+                        return good.removeChecked
+                    })
+                }
+                return false
+            },
+            set(newVal){
+                if (this.editingShop){
+                    this.editingShop.removeChecked=newVal
+                    this.editingShop.goodsList.forEach(good=>{
+                        good.removeChecked=newVal
+                    })
+                }
+            }
+        },
+        removeList(){
+            if (this.editingShop) {
+                let arr=[]
+                this.editingShop.goodsList.forEach(good=>{
+                    if (good.removeChecked){
+                        arr.push(good)
+                    }
+                })
+                return arr
+            }
+            return []
         }
     },
     methods:{
@@ -70,31 +102,41 @@ let view=new Vue({
                     shop.checked=true
                     shop.editingStatus=false
                     shop.editingMsg='编辑'
+                    shop.removeChecked=false
                     shop.goodsList.forEach(good=>{
                         good.checked=true
+                        good.removeChecked=false
                     })
                 })
                 this.cartLists=list
             })
         },
         goodSelect(shop,good){
-            good.checked=!good.checked
-            shop.checked=shop.goodsList.every(good=>{
-                return good.checked
+            let attr=shop.editingStatus?'removeChecked':'checked'
+            good[attr]=!good[attr]
+            shop[attr]=shop.goodsList.every(good=>{
+                return good[attr]
             })
         },
         shopSelect(shop,shopIndex){
-            shop.checked=!shop.checked
+            let attr=shop.editingStatus?'removeChecked':'checked'
+            shop[attr]=!shop[attr]
             shop.goodsList.forEach(good=>{
-                good.checked=shop.checked
+                good[attr]=shop[attr]
             })
         },
         selectAll(){
-            this.allSelect=!this.allSelect
+            if (!this.editingShop){
+                this.allSelect=!this.allSelect
+            } else {
+                this.allRemoveSelect=!this.allRemoveSelect
+            }
         },
         editingSwitch(shop,shopIndex){
             shop.editingStatus=!shop.editingStatus
             shop.editingMsg=shop.editingStatus?'完成':'编辑'
+            this.editingShop=shop.editingStatus?shop:null
+            this.editingShopIndex=shop.editingStatus?shopIndex:-1
             this.cartLists.forEach((otherShop,index)=>{
                 if (index!==shopIndex){
                    otherShop.editingMsg=shop.editingStatus?'':'编辑'

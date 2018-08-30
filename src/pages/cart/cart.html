@@ -35,7 +35,7 @@
           <div class="js-shop-list shop-list">
             <div class="block block-order block-cart"  v-for="(shop,shopIndex) in cartLists" :key="shop.shopId">
               <div class="header">
-                <div class="select-group js-select-group"><span class="check" :class="{checked:shop.checked}" @click="shopSelect(shop,shopIndex)"></span></div> <a class="shop-title"><i class="custom-store-img">店铺：</i>{{shop.shopTitle}}</a>
+                <div class="select-group js-select-group"><span class="check" :class="{checked:shop.editingStatus?shop.removeChecked:shop.checked}" @click="shopSelect(shop,shopIndex)"></span></div> <a class="shop-title"><i class="custom-store-img">店铺：</i>{{shop.shopTitle}}</a>
                 <a href="javascript:;" data-type="cart" class="j-edit-list pull-right c-blue font-size-12 edit-list" @click="editingSwitch(shop,shopIndex)">
                   <!---->
                   {{shop.editingMsg}}
@@ -46,7 +46,7 @@
                 <ul class="js-list block block-list block-list-cart border-0">
                   <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList" :key="good.id" :class="{editing:shop.editingStatus}">
                     <div>
-                      <div class="check-container"><span class="check" :class="{checked:good.checked}" @click="goodSelect(shop,good)"></span></div>
+                      <div class="check-container"><span class="check" :class="{checked:shop.editingStatus?good.removeChecked:good.checked}" @click="goodSelect(shop,good)"></span></div>
                       <div class="name-card clearfix">
                         <a href="https://h5.youzan.com/v2/showcase/goods?alias=2oivacpjh2ex0" class="thumb js-goods-link">
                           <img class="js-lazy" :src="good.img">
@@ -123,19 +123,19 @@
               你需要分开结算每个店铺的商品哦~
             </div>
             <div class="bottom-cart clear-fix">
-              <div class="select-all"  @click="selectAll"><span class="check" :class="{checked:allSelect}"></span> 全选
+              <div class="select-all"  @click="selectAll"><span class="check" :class="{checked:editingShop?allRemoveSelect:allSelect}"></span> 全选
               </div>
               <!-- 显示状态 -->
-              <div class="total-price">
+              <div class="total-price" v-show="!editingShop">
                 合计：¥<span class="js-total-price" style="color: rgb(255, 102, 0);">{{total | currency}}</span>
                 <p class="c-gray-dark">不含运费</p>
               </div>
-              <button href="javascript:;" class="js-go-pay btn btn-orange-dark font-size-14" :disabled="!selectList.length" >
+              <button href="javascript:;" class="js-go-pay btn btn-orange-dark font-size-14" :disabled="!selectList.length" v-show="!editingShop">
                 结算 {{totalNum}}
               </button>
               <!-- 编辑状态 -->
-              <button href="javascript:;" disabled="disabled" class="j-delete-goods btn font-size-14 btn-red"  style="display: none;">删除
-                    </button>
+              <button href="javascript:;" :disabled="!removeList.length" class="j-delete-goods btn font-size-14 btn-red"  v-show="editingShop">删除
+              </button>
             </div>
           </div>
         </div>
