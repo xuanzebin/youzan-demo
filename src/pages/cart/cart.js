@@ -15,7 +15,9 @@ let view=new Vue({
         totalNum:'',
         editingShop:null,
         editingShopIndex:-1,
-        removePopup:false
+        removePopup:false,
+        removeData:null,
+        removeMsg:'确定要删除该商品么?'
     },
     created(){
         this.getLists()
@@ -144,8 +146,52 @@ let view=new Vue({
                 }
             })
         },
-        removeSingelGood(good,goodIndex){
+        removeSingelGood(good,goodIndex,shop,shopIndex){
             this.removePopup=true
+            this.removeData={good,goodIndex,shop,shopIndex}
+            this.removeMsg='确定要删除该商品么?'
+        },
+        removeConfirm(){
+            this.removePopup=false
+            if (this.removeMsg==='确定要删除该商品么?'){
+                let {good,goodIndex,shop,shopIndex}=this.removeData
+                axios.post(url.remove,{id:good.id}).then(response=>{
+                    shop.goodsList.splice(goodIndex,1)
+                    if (!shop.goodsList.length) {
+                        this.cartLists.splice(shopIndex,1)
+                        this.removeComplete()
+                    }
+                })
+            } else {
+                let ids=[]
+                this.editingShop.goodsList.forEach(good=>{
+                    if (good.removeChecked) ids.push(good.id)
+                })
+                axios.post(url.mrremove,{id:ids}).then(response=>{
+                    let arr=[]
+                    this.editingShop.goodsList.forEach(good=>{
+                        if (!good.removeChecked) arr.push(good)
+                    })
+                    this.editingShop.goodsList=arr
+                    if (!arr.length){
+                        this.cartLists.splice(this.editingShopIndex,1)
+                        this.removeComplete()
+                    }
+                })
+            }
+        },
+        removeComplete(){
+            this.editingShop=null
+            this.editingShopIndex=-1
+            this.cartLists.forEach(shop=>{
+                shop.editingMsg='编辑'
+                shop.editingStatus=false
+            })
+        },
+        removeGoods(){
+            this.removePopup=true
+            let arr=this.removeList
+            this.removeMsg=`确认删除所选的${arr.length}个商品?`
         }
     },
     mixins:[mixin]

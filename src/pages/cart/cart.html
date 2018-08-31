@@ -77,7 +77,7 @@
                         </div>
                         <div class="error-box"></div>
                       </div>
-                      <div class="delete-btn" @click="removeSingelGood(good,goodIndex)"><span>删除</span></div>
+                      <div class="delete-btn" @click="removeSingelGood(good,goodIndex,shop,shopIndex)"><span>删除</span></div>
                     </div>
                   </li>
                 </ul>
@@ -134,7 +134,9 @@
                 结算 {{totalNum}}
               </button>
               <!-- 编辑状态 -->
-              <button href="javascript:;" :disabled="!removeList.length" class="j-delete-goods btn font-size-14 btn-red"  v-show="editingShop">删除
+              <button href="javascript:;" :disabled="!removeList.length" class="j-delete-goods btn font-size-14 btn-red"  v-show="editingShop"
+              @click="removeGoods"
+              >删除
               </button>
             </div>
           </div>
@@ -151,16 +153,16 @@
   <div class="van-dialog" style="z-index: 2002;" v-show="removePopup">
     <div class="van-hairline van-dialog__content">
       <div class="van-dialog__message">
-        确定要删除该商品么?
+        {{removeMsg}}
       </div>
     </div>
     <div class="van-dialog__footer van-dialog__footer--buttons">
-      <button class="van-button van-button--default van-button--large van-dialog__cancel" style="">
+      <button class="van-button van-button--default van-button--large van-dialog__cancel" style="" @click="removePopup=false">
         <span class="van-button__text">
           取消
         </span>
       </button>
-      <button class="van-button van-button--default van-button--large van-dialog__confirm van-hairline--left" style="color:#00c000;">
+      <button class="van-button van-button--default van-button--large van-dialog__confirm van-hairline--left" style="color:#00c000;" @click="removeConfirm">
         <span class="van-button__text">
           确认
         </span>
