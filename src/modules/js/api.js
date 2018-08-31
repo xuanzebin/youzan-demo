@@ -10,7 +10,9 @@ let url={
     evaluation:'/goods/evaluation',
     cartLists:'/cart/list',
     remove:'/cart/remove',
-    mrremove:'/cart/mrremove'
+    mrremove:'/cart/mrremove',
+    add:'/cart/add',
+    reduce:'/cart/reduce'
 }
 
 let host = 'http://rap2api.taobao.org/app/mock/7058'

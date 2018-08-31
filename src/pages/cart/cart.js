@@ -192,6 +192,17 @@ let view=new Vue({
             this.removePopup=true
             let arr=this.removeList
             this.removeMsg=`确认删除所选的${arr.length}个商品?`
+        },
+        addGood(good,goodIndex){
+            axios.post(url.add,{id:good.id}).then(response=>{
+                good.number++
+            })
+        },
+        reduceGood(good,goodIndex){
+            if (good.number===1) return
+            axios.post(url.reduce,{id:good.id}).then(response=>{
+                good.number--
+            })
         }
     },
     mixins:[mixin]

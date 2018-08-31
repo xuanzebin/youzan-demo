@@ -65,11 +65,11 @@
                           <div class="num"  v-show="shop.editingStatus">
                             <!---->
                             <div class="quantity">
-                              <button type="button" class="minus disabled"></button>
+                              <button type="button" class="minus" :class="{disabled:good.number===1}"></button>
                               <input type="text" pattern="[0-9]*" class="txt" :value="good.number">
                               <button type="button" class="plus "></button>
-                              <div class="response-area response-area-minus"></div>
-                              <div class="response-area response-area-plus"></div>
+                              <div class="response-area response-area-minus" @click="reduceGood(good,goodIndex)"></div>
+                              <div class="response-area response-area-plus" @click="addGood(good,goodIndex)"></div>
                             </div>
                           </div>
                           <div class="price c-orange">
