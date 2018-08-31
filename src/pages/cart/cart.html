@@ -44,7 +44,12 @@
               <!---->
               <div>
                 <ul class="js-list block block-list block-list-cart border-0">
-                  <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList" :key="good.id" :class="{editing:shop.editingStatus}">
+                  <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList" :key="good.id" 
+                  :class="{editing:shop.editingStatus}"
+                  :ref="'goods-'+shopIndex+'-'+goodIndex"
+                  @touchstart="start($event,good)"
+                  @touchend="end($event,good,goodIndex,shopIndex,shop)"
+                  >
                     <div>
                       <div class="check-container"><span class="check" :class="{checked:shop.editingStatus?good.removeChecked:good.checked}" @click="goodSelect(shop,good)"></span></div>
                       <div class="name-card clearfix">
@@ -66,7 +71,7 @@
                             <!---->
                             <div class="quantity">
                               <button type="button" class="minus" :class="{disabled:good.number===1}"></button>
-                              <input type="text" pattern="[0-9]*" class="txt" :value="good.number">
+                              <input type="text" pattern="[0-9]*" class="txt" v-model:value="good.number">
                               <button type="button" class="plus "></button>
                               <div class="response-area response-area-minus" @click="reduceGood(good,goodIndex)"></div>
                               <div class="response-area response-area-plus" @click="addGood(good,goodIndex)"></div>
