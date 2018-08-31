@@ -7,6 +7,7 @@ import url from 'js/api.js'
 import mixin from 'js/mixin.js'
 import axios from 'axios'
 import Velocity from 'velocity-animate'
+import cart from 'js/cartService.js'
 
 let view=new Vue({
     el:'#app',
@@ -18,7 +19,8 @@ let view=new Vue({
         editingShopIndex:-1,
         removePopup:false,
         removeData:null,
-        removeMsg:'确定要删除该商品么?'
+        removeMsg:'确定要删除该商品么?',
+        isDeleted:-1
     },
     created(){
         this.getLists()
@@ -100,7 +102,7 @@ let view=new Vue({
     },
     methods:{
         getLists(){
-            axios.post(url.cartLists).then((response)=>{
+            cart.getCartLists().then((response)=>{
                 let list=response.data.cartList
                 list.forEach(shop=>{
                     shop.checked=true
@@ -139,7 +141,7 @@ let view=new Vue({
         },
         editingSwitch(shop,shopIndex){
             shop.editingStatus=!shop.editingStatus
-            if (shop.editingStatus){
+            if (shop.editingStatus){    
                 shop.goodsList.forEach((good,index)=>{
                     if (good.touchDelete){
                         good.touchDelete=false
@@ -165,7 +167,7 @@ let view=new Vue({
             this.removePopup=false
             if (this.removeMsg==='确定要删除该商品么?'){
                 let {good,goodIndex,shop,shopIndex}=this.removeData
-                axios.post(url.remove,{id:good.id}).then(response=>{
+                cart.remove(good.id).then(response=>{
                     shop.goodsList.splice(goodIndex,1)
                     if (!shop.goodsList.length) {
                         this.cartLists.splice(shopIndex,1)
@@ -177,7 +179,7 @@ let view=new Vue({
                 this.editingShop.goodsList.forEach(good=>{
                     if (good.removeChecked) ids.push(good.id)
                 })
-                axios.post(url.mrremove,{ids}).then(response=>{
+                cart.mrremove(ids).then(response=>{
                     let arr=[]
                     this.editingShop.goodsList.forEach(good=>{
                         if (!good.removeChecked) arr.push(good)
@@ -204,13 +206,13 @@ let view=new Vue({
             this.removeMsg=`确认删除所选的${arr.length}个商品?`
         },
         addGood(good,goodIndex){
-            axios.post(url.add,{id:good.id, number:1}).then(response=>{
+            cart.add(good.id).then(response=>{
                 good.number++
             })
         },
         reduceGood(good,goodIndex){
             if (good.number===1) return
-            axios.post(url.reduce,{id:good.id, number:-1}).then(response=>{
+            cart.reduce(good.id).then(response=>{
                 good.number--
             })
         },
