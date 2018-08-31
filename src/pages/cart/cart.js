@@ -98,6 +98,28 @@ let view=new Vue({
                 return arr
             }
             return []
+        },
+        filterNumber(){
+            if (this.editingShop){
+                return this.editingShop.goodsList.map(good=>{
+                    let stringNumber=good.number+''
+                    stringNumber.split('').forEach(string=>{
+                        let boo=false
+                        for (let i=0;i<10;i++){
+                            if ((i+'')===string){
+                                boo=true
+                                break
+                            }
+                        }
+                        if (!boo){
+                            good.number=1
+                        }
+                    })
+                    if (good.number<1) good.number=1
+                    return good
+                })
+            }
+            return false
         }
     },
     methods:{

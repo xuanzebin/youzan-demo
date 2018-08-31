@@ -44,7 +44,7 @@
               <!---->
               <div>
                 <ul class="js-list block block-list block-list-cart border-0">
-                  <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList" :key="good.id" 
+                  <li class="block-item block-item-cart" v-for="(good,goodIndex) in (shopIndex===editingShopIndex?filterNumber||shop.goodsList:shop.goodsList)" :key="good.id" 
                   :class="{editing:shop.editingStatus}"
                   :ref="'goods-'+shopIndex+'-'+goodIndex"
                   @touchstart="start($event,good)"
