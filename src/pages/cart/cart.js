@@ -167,7 +167,7 @@ let view=new Vue({
                 shop.goodsList.forEach((good,index)=>{
                     if (good.touchDelete){
                         good.touchDelete=false
-                        Velocity(this.$refs[`goods-${shopIndex}-${index}`],{left:'0px'})
+                       this.$refs[`goods-${shopIndex}-${index}`][0].style.left='0px'
                     }
                 })
             }
