@@ -19,6 +19,13 @@ export default {
   created(){
   },
   methods: {
+      saveAddress(){
+          let {name,tel,provinceValue,cityValue,districtValue,addressValue}=this
+          let data={name,tel,provinceValue,cityValue,districtValue,addressValue}
+          address.addAddress(data).then(response=>{
+              this.$router.go(-1)
+          })
+      }
   },
   watch:{
       provinceValue(val){
