@@ -34,16 +34,11 @@ export default {
     },
     methods:{
         toEdit(data){
-            console.log(data)
             this.$router.push({path:'form',query:{
                 type:'edit',
-                instance:this.addressList
+                instance:data
             }})
         }
     }
 }
 </script>
-
-
-
-

@@ -37,17 +37,22 @@
     <div class="block section js-save block-control-btn">
       <div class="block-item c-blue center" @click="saveAddress">保存</div>
     </div>
-    <div class="block section js-delete hide block-control-btn">
+    <div class="block section js-delete block-control-btn" v-show="type==='edit'"
+    @click="removeAddress"
+    >
       <div class="block-item c-red center">删除</div>
     </div>
-    <div class="block stick-bottom-row center js-save-default hide">
-      <button class="btn btn-standard js-save-default-btn">设为默认收货地址</button>
+    <div class="block stick-bottom-row center js-save-default" v-show="type==='edit'">
+      <button class="btn btn-standard js-save-default-btn"
+      :class="{disable:isDefault}" 
+      :disabled="isDefault"
+      @click="defaultAddress">设为默认收货地址</button>
     </div>
   </div>
 </template>
 <style scoped>
-  @import './member_base.css';
-  @import './member.css';
+  @import './address_base.css';
+  @import './address.css';
 </style>
 <script src="./form.js"></script>
 

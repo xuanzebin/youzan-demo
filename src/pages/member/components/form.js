@@ -13,18 +13,50 @@ export default {
         instance:this.$route.query.instance,
         addressData:require('./address.json'),
         cityList:null,
-        districtList:null
+        districtList:null,
+        isDefault:false
     }
   },
   created(){
+      if (this.type=='edit'){
+          let ad=this.instance
+          this.name=ad.name
+          this.tel=ad.tel
+          this.addressValue=ad.address
+          this.provinceValue=parseInt(ad.provinceValue)
+          this.cityValue=parseInt(ad.cityValue)
+          this.districtValue=parseInt(ad.districtValue)
+          this.isDefault=ad.isDefault
+      }
   },
   methods: {
       saveAddress(){
           let {name,tel,provinceValue,cityValue,districtValue,addressValue}=this
           let data={name,tel,provinceValue,cityValue,districtValue,addressValue}
-          address.addAddress(data).then(response=>{
-              this.$router.go(-1)
+          if (this.type==='add'){
+            address.addAddress(data).then(response=>{
+                this.$router.go(-1)
+            })
+          } else {
+            data.id=this.id
+            address.editAddress(data).then(response=>{
+                this.$router.go(-1)
+            })
+          }
+      },
+      defaultAddress(){
+          let id=this.id
+          this.isDefault=!this.isDefault
+          address.defaultAddress({id}).then(response=>{
           })
+      },
+      removeAddress(){
+          let id=this.id
+          if (window.confirm('确认要删除吗？')){
+            address.removeAddress({id}).then(response=>{
+                this.$router.go(-1)
+            })
+          }
       }
   },
   watch:{
