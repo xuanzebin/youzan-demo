@@ -264,9 +264,9 @@ textarea {
 hr {
   margin: 10px 0;
   border: 0px none;
-  -webkit-border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
+  /* -webkit-border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
   -moz-border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
-  border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
+  border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch; */
   border-top: 2px solid #e5e5e5
 }
 
@@ -593,9 +593,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
   padding: 10px;
   line-height: 22px;
   border: 0px none;
-  -webkit-border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
+  /* -webkit-border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
   -moz-border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
-  border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch;
+  border-image: url("https://b.yzcdn.cn/v2/image/wap/border-line.png") 2 stretch; */
   border-bottom: 2px solid #e5e5e5;
   overflow: hidden
 }
@@ -1126,9 +1126,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .pc-promote-code .wx-info-block {
   margin: 10px 5px;
   padding-bottom: 10px;
-  -webkit-border-image: url("https://b.yzcdn.cn/v2/image/pf/ui/border-line.png") 2 stretch;
+  /* -webkit-border-image: url("https://b.yzcdn.cn/v2/image/pf/ui/border-line.png") 2 stretch;
   -moz-border-image: url("https://b.yzcdn.cn/v2/image/pf/ui/border-line.png") 2 stretch;
-  border-image: url("https://b.yzcdn.cn/v2/image/pf/ui/border-line.png") 2 stretch;
+  border-image: url("https://b.yzcdn.cn/v2/image/pf/ui/border-line.png") 2 stretch; */
   border-bottom: 2px solid #e5e5e5
 }
 

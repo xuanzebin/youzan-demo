@@ -224,9 +224,9 @@ body {
 }
 
 .section {
-  -webkit-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
+  /* -webkit-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
   -moz-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
-  border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
+  border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch; */
   border-top: 2px solid #e5e5e5;
   border-bottom: 2px solid #e5e5e5
 }
@@ -274,9 +274,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 .stick-bottom-row.block {
-  -webkit-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
+  /* -webkit-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
   -moz-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
-  border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
+  border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch; */
   border-top: 2px solid #e5e5e5;
   background-color: #fff
 }
@@ -319,9 +319,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
   display: inline-block;
   padding-right: 8px;
   margin-right: 8px;
-  -webkit-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
+  /* -webkit-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
   -moz-border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
-  border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch;
+  border-image: url("https://b.yzcdn.cn2/image/pf/ui/border-line.png") 2 stretch; */
   border-right: 2px solid #e5e5e5
 }
 
@@ -643,7 +643,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 .select-group select {
   display: inline-block !important;
-  width: 33% !important;
+  width: 32% !important;
   font-size: 12px
 }
 
