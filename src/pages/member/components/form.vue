@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="format-detection" content="telephone=no">
-  <meta http-equiv="cleartype" content="on">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="keywords" content="服装批发,河南批发,郑州批发,进货,服装进货,网上批发,网上进货,郑州服装批发,河南服装批发,郑州服装进货,有赞批发">
-  <meta name="description" content="有赞批发—传统批发+互联网解决方案,提供服装批发、服装货源、进货服务、线下整合等一整套互联网解决方案">
-  <link rel="shortcut icon" href="https://static.youzan.com/v2/image/yz_fc.ico">
-  <title>添加收货地址</title>
-  <link rel="stylesheet" href="./css/address_base.css">
-  <link rel="stylesheet" href="./css/address.css">
-</head>
-
-<body class="" style="cursor:pointer;">
+<template>
   <div class="container " style="min-height: 597px;">
     <div class="section section-first">
       <div class="block form js-form">
@@ -93,7 +75,9 @@
       <button class="btn btn-standard js-save-default-btn">设为默认收货地址</button>
     </div>
   </div>
-  <a style="display: block;" href="https://pfmarket.youzan.com/market/home?m_alias=3nu78u467kddj" class="ft-copyright"></a>
-</body>
+</template>
+<style scoped>
+  @import './member.css';
+  @import './member_base.css';
+</style>
 
-</html>
