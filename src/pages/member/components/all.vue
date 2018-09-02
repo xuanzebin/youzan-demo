@@ -24,13 +24,20 @@ import address from 'js/addressService.js'
 export default {
     data(){
         return {
-            addressList:null
+        }
+    },
+    computed:{
+        addressList(){
+            return this.$store.state.lists
         }
     },
     created(){
-        address.getList().then(response=>{
-            this.addressList=response.data.lists
-        })
+        // address.getList().then(response=>{
+        //     this.addressList=response.data.lists
+        // })
+        if (!this.addressList){
+            this.$store.dispatch('getLists')
+        }
     },
     methods:{
         toEdit(data){

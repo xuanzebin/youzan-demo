@@ -7,14 +7,15 @@ export default {
         provinceValue:-1,
         cityValue:-1,
         districtValue:-1,
-        addressValue:'',
+        address:'',
         id:'',
         type:this.$route.query.type,
         instance:this.$route.query.instance,
         addressData:require('./address.json'),
         cityList:null,
         districtList:null,
-        isDefault:false
+        isDefault:false,
+        editInit:0
     }
   },
   created(){
@@ -22,26 +23,29 @@ export default {
           let ad=this.instance
           this.name=ad.name
           this.tel=ad.tel
-          this.addressValue=ad.address
+          this.address=ad.address
           this.provinceValue=parseInt(ad.provinceValue)
           this.cityValue=parseInt(ad.cityValue)
           this.districtValue=parseInt(ad.districtValue)
           this.isDefault=ad.isDefault
+          this.id=ad.id
       }
   },
   methods: {
       saveAddress(){
-          let {name,tel,provinceValue,cityValue,districtValue,addressValue}=this
-          let data={name,tel,provinceValue,cityValue,districtValue,addressValue}
+          let {name,tel,provinceValue,cityValue,districtValue,address}=this
+          let data={name,tel,provinceValue,cityValue,districtValue,address}
           if (this.type==='add'){
-            address.addAddress(data).then(response=>{
-                this.$router.go(-1)
-            })
+            // address.addAddress(data).then(response=>{
+            //     this.$router.go(-1)
+            // })
+            this.$store.dispatch('addAddress',data)
           } else {
             data.id=this.id
-            address.editAddress(data).then(response=>{
-                this.$router.go(-1)
-            })
+            // address.editAddress(data).then(response=>{
+            //     this.$router.go(-1)
+            // })
+            this.$store.dispatch('editAddress',data)
           }
       },
       defaultAddress(){
@@ -60,22 +64,30 @@ export default {
       }
   },
   watch:{
-      provinceValue(val){
+      provinceValue(val,oldVal){
           if (val===-1) return 
           let index=this.addressData.list.findIndex(province=>{
-              return province.value===this.provinceValue
+              return province.value===val
           })
           this.cityList=this.addressData.list[index].children
           this.cityValue=-1
           this.districtValue=-1
+          if (this.type==='edit' && parseInt(this.instance.provinceValue)===val && this.editInit!==2){
+              this.editInit++
+              this.cityValue=parseInt(this.instance.cityValue)
+          }
       },
-      cityValue(val){
+      cityValue(val,oldVal){
           if (val===-1) return 
           let index=this.cityList.findIndex(city=>{
-              return city.value===this.cityValue
+              return city.value===val
           })
           this.districtList=this.cityList[index].children
           this.districtValue=-1
+          if (this.type==='edit' && parseInt(this.instance.cityValue)===val && this.editInit!==2){
+              this.editInit++
+              this.districtValue=parseInt(this.instance.districtValue)
+          }
       }
   }
 }
