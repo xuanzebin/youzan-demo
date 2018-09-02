@@ -17,11 +17,32 @@ const store=new Vuex.Store({
         },
         edit(state,instance){
             let list=JSON.parse(JSON.stringify(state.lists))
-            state.lists.forEach(address=>{
+            state.lists.forEach((address,index)=>{
                 if (address.id===instance.id){
-                    address=instance
+                    list[index]=instance
                 }
             })
+            state.lists=list
+        },
+        setDefault(state,id){
+            state.lists.forEach((address,index)=>{
+                if (address.id===id){
+                    state.lists[index].isDefault=true
+                } else {
+                    state.lists[index].isDefault=false
+                }
+            })
+        },
+        remove(state,id){
+            let index=state.lists.findIndex(address=>{
+                return address.id===id
+            })
+            if (state.lists.length && state.lists[index].isDefault){
+                state.lists.splice(index,1)
+                state.lists[0].isDefault=true
+            } else {
+                state.lists.splice(index,1)
+            }
         }
     },
     actions: {
@@ -40,6 +61,16 @@ const store=new Vuex.Store({
         editAddress({commit},instance){
             address.editAddress(instance).then(response=>{
                 commit('edit',instance)
+            })
+        },
+        defaultAddress({commit},id){
+            address.defaultAddress({id}).then(response=>{
+                commit('setDefault',id)
+            })
+        },
+        removeAddress({commit},id){
+            address.removeAddress({id}).then(response=>{
+                commit('remove',id)
             })
         }
     }

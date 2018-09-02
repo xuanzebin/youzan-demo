@@ -15,7 +15,10 @@ export default {
         cityList:null,
         districtList:null,
         isDefault:false,
-        editInit:0
+        editInit:0,
+        provinceName:'',
+        cityName:'',
+        districtName:''
     }
   },
   created(){
@@ -29,12 +32,20 @@ export default {
           this.districtValue=parseInt(ad.districtValue)
           this.isDefault=ad.isDefault
           this.id=ad.id
+          this.provinceName=ad.provinceName
+          this.cityName=ad.cityName
+          this.districtName=ad.districtName
       }
+  },
+  computed: {
+    addressList(){
+        return this.$store.state.lists
+    }
   },
   methods: {
       saveAddress(){
-          let {name,tel,provinceValue,cityValue,districtValue,address}=this
-          let data={name,tel,provinceValue,cityValue,districtValue,address}
+          let {name,tel,provinceValue,cityValue,districtValue,address,isDefault,provinceName,cityName,districtName}=this
+          let data={name,tel,provinceValue,cityValue,districtValue,address,isDefault,provinceName,cityName,districtName}
           if (this.type==='add'){
             // address.addAddress(data).then(response=>{
             //     this.$router.go(-1)
@@ -50,16 +61,18 @@ export default {
       },
       defaultAddress(){
           let id=this.id
-          this.isDefault=!this.isDefault
-          address.defaultAddress({id}).then(response=>{
-          })
+        //   this.isDefault=!this.isDefault
+        //   address.defaultAddress({id}).then(response=>{
+        //   })
+          this.$store.dispatch('defaultAddress',id)
       },
       removeAddress(){
           let id=this.id
           if (window.confirm('确认要删除吗？')){
-            address.removeAddress({id}).then(response=>{
-                this.$router.go(-1)
-            })
+            // address.removeAddress({id}).then(response=>{
+            //     this.$router.go(-1)
+            // })
+            this.$store.dispatch('removeAddress',id)
           }
       }
   },
@@ -88,6 +101,12 @@ export default {
               this.editInit++
               this.districtValue=parseInt(this.instance.districtValue)
           }
+      },
+      addressList:{
+        handler(){
+            this.$router.go(-1)
+        },
+        deep:true
       }
   }
 }
