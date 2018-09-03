@@ -4,6 +4,7 @@
   "description": "A Vue.js project",
   "author": "xuanzebin <xuanzebin@126.com>",
   "private": true,
+  "homepage":"https://xuanzebin.github.io/youzan-demo/dist",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
