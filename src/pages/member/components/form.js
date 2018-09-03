@@ -78,10 +78,14 @@ export default {
   },
   watch:{
       provinceValue(val,oldVal){
-          if (val===-1) return 
+          if (val===-1) {
+              this.provinceName='选择省份'
+              return 
+          } 
           let index=this.addressData.list.findIndex(province=>{
               return province.value===val
           })
+          this.provinceName=this.addressData.list[index].label
           this.cityList=this.addressData.list[index].children
           this.cityValue=-1
           this.districtValue=-1
@@ -91,16 +95,30 @@ export default {
           }
       },
       cityValue(val,oldVal){
-          if (val===-1) return 
+          if (val===-1){
+              this.cityName='选择城市'
+              return 
+          } 
           let index=this.cityList.findIndex(city=>{
               return city.value===val
           })
+          this.cityName=this.cityList[index].label
           this.districtList=this.cityList[index].children
           this.districtValue=-1
           if (this.type==='edit' && parseInt(this.instance.cityValue)===val && this.editInit!==2){
               this.editInit++
               this.districtValue=parseInt(this.instance.districtValue)
           }
+      },
+      districtValue(val,oldVal){
+        if (val===-1){
+            this.districtName='选择地区'
+            return
+        }
+        let index=this.districtList.findIndex(district=>{
+            return district.value===val
+        })
+        this.districtName=this.districtList[index].label
       },
       addressList:{
         handler(){
