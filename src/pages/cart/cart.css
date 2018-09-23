@@ -1709,6 +1709,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
   top: initial;
   bottom: 0px;
 }
+
+
 .van-dialog {
   margin: 0;
   padding: 0;

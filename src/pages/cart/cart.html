@@ -155,6 +155,7 @@
         <a class="yz-logo" href="https://www.youzan.com/?from_source=support_logo">有赞提供技术支持</a> </div>
     </div>
   </div>
+
   <div class="van-dialog" style="z-index: 2002;" v-show="removePopup">
     <div class="van-hairline van-dialog__content">
       <div class="van-dialog__message">
@@ -167,7 +168,8 @@
           取消
         </span>
       </button>
-      <button class="van-button van-button--default van-button--large van-dialog__confirm van-hairline--left" style="color:#00c000;" @click="removeConfirm">
+      <button class="van-button van-button--default van-button--large van-dialog__confirm van-hairline--left" style="color:#00c000;" 
+      @click="removeConfirm">
         <span class="van-button__text">
           确认
         </span>
@@ -175,6 +177,9 @@
     </div>
   </div>
   <div class="van-modal" style="z-index: 2001;" v-show="removePopup"></div>
+
+
+  
 </div>
 </body>
 </html>

@@ -78,8 +78,9 @@ export default {
   },
   watch:{
       provinceValue(val,oldVal){
-          if (val===-1) {
+          if (parseInt(val)===-1) {
               this.provinceName='选择省份'
+              this.cityValue=-1
               return 
           } 
           let index=this.addressData.list.findIndex(province=>{
@@ -95,8 +96,9 @@ export default {
           }
       },
       cityValue(val,oldVal){
-          if (val===-1){
+          if (parseInt(val)===-1){
               this.cityName='选择城市'
+              this.districtValue=-1
               return 
           } 
           let index=this.cityList.findIndex(city=>{
@@ -111,7 +113,7 @@ export default {
           }
       },
       districtValue(val,oldVal){
-        if (val===-1){
+        if (parseInt(val)===-1){
             this.districtName='选择地区'
             return
         }
